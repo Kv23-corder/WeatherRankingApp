@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #c6dbe1;
+  --surface: #ffffff;
+  --ink: #163838;
+  --ink-muted: #141313;
+  --ink-faint: #8b93a1;
+  --border: #e4e7ec;
+  --accent: #28826a;
+  --accent-soft: #e4f2ed;
+  --gold: #b9860a;
+  --silver: #7c8794;
+  --bronze: #903b0b;
+  --danger: #a32d2d;
+  --radius: 14px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+.dashboard header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard header h1 {
+  font-size: 32px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+}
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.city-card {
+  position: relative;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-left: 5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 20px 18px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(27, 36, 48, 0.08);
+}
+
+/* Top 3 ranked cities get a quiet medal accent - the ranking already
+   makes them a sequence, so this reinforces meaning already present */
+.city-grid .city-card:nth-child(1) {
+  border-left-color: var(--gold);
+}
+.city-grid .city-card:nth-child(2) {
+  border-left-color: var(--silver);
+}
+.city-grid .city-card:nth-child(3) {
+  border-left-color: var(--bronze);
+}
+
+.city-card .rank {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.city-card h2 {
+  margin: 0 0 2px;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.0001em;
+}
+
+.city-card .description {
+  color: var(--ink-muted);
+  text-transform: capitalize;
+  font-size: 14px;
+  margin: 2px 0 14px;
+}
+
+.city-card .temperature {
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.city-card .score {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.auth-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--ink-muted);
+}
+
+.auth-box button {
+  padding: 8px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.auth-box button:hover {
+  border-color: var(--ink-faint);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .city-card {
+    transition: none;
+  }
+  .city-card:hover {
+    transform: none;
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 480px) {
+  .city-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
